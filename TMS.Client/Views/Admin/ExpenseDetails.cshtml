@@ -1,0 +1,110 @@
+﻿@model IEnumerable<TMS.Client.Models.ExpenseAndTravel>
+
+@{
+    ViewBag.Title = "ExpenseDetails";
+}
+
+<h2>ExpenseDetails</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpenseReportId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpenseType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpenseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountSpent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MRNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReimbursementAccountNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpenseStatus)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpenseReportId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpenseType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpenseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountSpent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MRNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReimbursementAccountNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpenseStatus)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                <button type="button" value=@item.ExpenseReportId id="approve" class="btn btn-success">Approve</button>
+                <button type="button" value=@item.ExpenseReportId id="reject" class="btn btn-success">Reject</button>
+            </td>
+        </tr>
+    }
+
+</table>
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+
+    <script type="text/javascript">
+        $("#approve").click(function () {
+            $.ajax({
+                type: "Post",
+                url: "https://localhost:44331/admin/ApproveExpenseRequest/" + $("#approve").val(),
+                success: function () {
+                    location.reload(true);
+                }
+
+            });
+        });
+        $("#reject").click(function () {
+            $.ajax({
+                type: "Post",
+                url: "https://localhost:44331/admin/RejectExpenseRequest/" + $("#reject").val(),
+                success: function () {
+                    location.reload(true);
+                }
+
+            });
+        });
+
+    </script>
+}
+

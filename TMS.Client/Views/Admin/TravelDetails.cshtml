@@ -1,0 +1,115 @@
+﻿@model IEnumerable<TMS.ClientSide.Models.TravelDetails>
+
+@{
+    ViewBag.Title = "TravelDetails";
+}
+
+<h2>TravelDetails</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MRNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Applydate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReasonForTravel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TravelDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TravelMode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TravelDuration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MRNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Applydate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReasonForTravel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TravelDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TravelMode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TravelDuration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditTravelDetail", new { id = item.MRNumber }) |
+                <button type="button" value=@item.MRNumber id="approve" class="btn btn-success">Approve</button>
+                <button type="button" value=@item.MRNumber id="reject" class="btn btn-success">Reject</button>
+            </td>
+        </tr>
+    }
+
+</table>
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+   
+    <script type="text/javascript">
+        $("#approve").click(function () {
+            $.ajax({
+                type: "Post",
+                url: "https://localhost:44331/admin/ApproveTravelRequest/" + $("#approve").val(),
+                success: function () {
+                    location.reload(true);
+                }
+
+            });
+        });
+        $("#reject").click(function () {
+            $.ajax({
+                type: "Post",
+                url: "https://localhost:44331/admin/RejectTravelRequest/" + $("#reject").val(),
+                success: function () {
+                    location.reload(true);
+                }
+
+            });
+        });
+
+    </script>
+}

@@ -1,0 +1,61 @@
+﻿@model TMS.Client.Models.RegisterBindingModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+
+}
+
+<div class="loginform">
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+        <div class="heading">Registration</div>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        @Html.EditorFor(model => model.EmployeeId, new { htmlAttributes = new { placeholder = Html.DisplayNameFor(e => e.EmployeeId) } })
+        @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
+
+
+        @Html.EditorFor(model => model.EmployeeFirstName, new { htmlAttributes = new { placeholder = Html.DisplayNameFor(e => e.EmployeeFirstName) } })
+        @Html.ValidationMessageFor(model => model.EmployeeFirstName, "", new { @class = "text-danger" })
+
+        @Html.EditorFor(model => model.EmployeeLastName, new { htmlAttributes = new { placeholder = Html.DisplayNameFor(e => e.EmployeeLastName) } })
+        @Html.ValidationMessageFor(model => model.EmployeeLastName, "", new { @class = "text-danger" })
+
+
+        @Html.EditorFor(model => model.Location, new { htmlAttributes = new { placeholder = Html.DisplayNameFor(e => e.Location) } })
+        @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+
+        @Html.EditorFor(model => model.ReimbursementAccountNo, new { htmlAttributes = new { placeholder = Html.DisplayNameFor(e => e.ReimbursementAccountNo) } })
+        @Html.ValidationMessageFor(model => model.ReimbursementAccountNo, "", new { @class = "text-danger" })
+
+
+        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = Html.DisplayNameFor(e => e.Password) } })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+
+
+        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { placeholder = Html.DisplayNameFor(e => e.ConfirmPassword) } })
+        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+
+
+        <input type="submit" value="Register" />
+
+
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Login", "Login")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
